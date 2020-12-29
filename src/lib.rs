@@ -7,7 +7,11 @@ mod cell;
 use crate::cell::Cell;
 
 mod sudoku;
-use crate::sudoku::Sudoku;
+pub use crate::sudoku::Sudoku;
+
+// // to run tests
+// #[cfg(test)]
+// mod tests;
 
 #[wasm_bindgen(start)]
 pub fn run() ->  Result<(), JsValue>{
@@ -46,7 +50,3 @@ pub fn run() ->  Result<(), JsValue>{
 
     Ok(())
 }
-
-// to run tests
-#[cfg(test)]
-mod tests;

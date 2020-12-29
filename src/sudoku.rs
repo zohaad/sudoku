@@ -21,14 +21,15 @@ impl Hint {
         if !(1..=9).contains(&value) {
             panic!("this isn't allowed to happen");
         }
-        Hint { i, j, value }
+        Self { i, j, value }
     }
 }
 
 impl Sudoku {
     pub fn new(cells: [Cell; 81]) -> Self {
-        let mut matrix: [[Cell; 9]; 9] = [[Cell::NoSolution; 9]; 9];
-        let mut hints: VecDeque<Hint> = VecDeque::new(); 
+        // TODO: remove useless allocation
+        let mut matrix: [[Cell; 9]; 9] = [[Cell::NoSolution; 9]; 9]; 
+        let mut hints = VecDeque::new(); 
 
         for i in 0..9 {
             for j in 0..9 {
@@ -38,7 +39,19 @@ impl Sudoku {
                 }
             }
         }
-        Sudoku { matrix, hints }
+        Self { matrix, hints }
+    }
+
+    pub fn test_new(hints: Vec<[usize; 3]>) -> Self {
+        let mut matrix = [[Cell::Candidates([true; 9]); 9]; 9];
+        let mut hints_deque = VecDeque::new();
+
+        for [i, j, value] in hints {
+            matrix[i][j] = Cell::Solution(value);
+            hints_deque.push_back(Hint::new(i, j, value));
+        }
+
+        Self { matrix, hints: hints_deque }
     }
 
     // TODO: implement solve method
@@ -52,7 +65,7 @@ impl Sudoku {
     }
 }
 
-// to make sudoku.into() work
+// to make sudoku.into() work for console.log
 impl From<Sudoku> for JsValue {
     #[inline] // what does #[inline] even do?
     fn from(sudoku: Sudoku) -> Self {
