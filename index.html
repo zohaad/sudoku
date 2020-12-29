@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sudoku</title>
+  <style>
+    body {
+      font-family: Avenir, Heveltica, sans-serif;
+    }
+    li:nth-child(n):nth-child(-n+9) {
+    border-top-width: 4px;
+    }
+    li:nth-child(n+73):nth-child(-n+81) {
+    border-bottom-width: 4px;
+    }
+    li:nth-child(3n) {
+    border-right-width: 4px;
+    }
+    li:nth-child(9n+1) {
+    border-left-width: 4px;
+    }
+    li:nth-child(n+19):nth-child(-n+27) {
+    border-bottom-width: 4px;
+    }
+    li:nth-child(n+46):nth-child(-n+54) {
+    border-bottom-width: 4px;
+    }
+
+    ul  {
+    display: grid;
+    grid-template-columns: repeat(9, 5vw);
+    grid-template-rows: repeat(9, 5vw);
+    justify-content: center;
+    align-content: center;
+    grid-gap: 0rem;
+    list-style: none;
+    margin: 0 0 2vw;
+    padding: 0;
+    font-size: calc(2vw + 10px);
+    }
+    li {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    span {
+        margin-top: 0.4rem;
+      }
+    }
+    input {
+      /* min-width: 0; */
+      font-family: inherit;
+      font-size: inherit;
+      text-align: inherit;
+      box-sizing: border-box;
+      width: 100%;
+      height: 100%;
+    }
+    .wrapper {
+      text-align: center;
+    }
+    .button {
+      position: relative;
+      top: 50%;
+      font-size: 20px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <ul id="sudoku">
+      <li><input id="0" type="text" maxlength="1"></li>
+      <li><input id="1" type="text" maxlength="1"></li>
+      <li><input id="2" type="text" maxlength="1"></li>
+      <li><input id="3" type="text" maxlength="1"></li>
+      <li><input id="4" type="text" maxlength="1"></li>
+      <li><input id="5" type="text" maxlength="1"></li>
+      <li><input id="6" type="text" maxlength="1"></li>
+      <li><input id="7" type="text" maxlength="1"></li>
+      <li><input id="8" type="text" maxlength="1"></li>
+      <li><input id="9" type="text" maxlength="1"></li>
+      <li><input id="10" type="text" maxlength="1"></li>
+      <li><input id="11" type="text" maxlength="1"></li>
+      <li><input id="12" type="text" maxlength="1"></li>
+      <li><input id="13" type="text" maxlength="1"></li>
+      <li><input id="14" type="text" maxlength="1"></li>
+      <li><input id="15" type="text" maxlength="1"></li>
+      <li><input id="16" type="text" maxlength="1"></li>
+      <li><input id="17" type="text" maxlength="1"></li>
+      <li><input id="18" type="text" maxlength="1"></li>
+      <li><input id="19" type="text" maxlength="1"></li>
+      <li><input id="20" type="text" maxlength="1"></li>
+      <li><input id="21" type="text" maxlength="1"></li>
+      <li><input id="22" type="text" maxlength="1"></li>
+      <li><input id="23" type="text" maxlength="1"></li>
+      <li><input id="24" type="text" maxlength="1"></li>
+      <li><input id="25" type="text" maxlength="1"></li>
+      <li><input id="26" type="text" maxlength="1"></li>
+      <li><input id="27" type="text" maxlength="1"></li>
+      <li><input id="28" type="text" maxlength="1"></li>
+      <li><input id="29" type="text" maxlength="1"></li>
+      <li><input id="30" type="text" maxlength="1"></li>
+      <li><input id="31" type="text" maxlength="1"></li>
+      <li><input id="32" type="text" maxlength="1"></li>
+      <li><input id="33" type="text" maxlength="1"></li>
+      <li><input id="34" type="text" maxlength="1"></li>
+      <li><input id="35" type="text" maxlength="1"></li>
+      <li><input id="36" type="text" maxlength="1"></li>
+      <li><input id="37" type="text" maxlength="1"></li>
+      <li><input id="38" type="text" maxlength="1"></li>
+      <li><input id="39" type="text" maxlength="1"></li>
+      <li><input id="40" type="text" maxlength="1"></li>
+      <li><input id="41" type="text" maxlength="1"></li>
+      <li><input id="42" type="text" maxlength="1"></li>
+      <li><input id="43" type="text" maxlength="1"></li>
+      <li><input id="44" type="text" maxlength="1"></li>
+      <li><input id="45" type="text" maxlength="1"></li>
+      <li><input id="46" type="text" maxlength="1"></li>
+      <li><input id="47" type="text" maxlength="1"></li>
+      <li><input id="48" type="text" maxlength="1"></li>
+      <li><input id="49" type="text" maxlength="1"></li>
+      <li><input id="50" type="text" maxlength="1"></li>
+      <li><input id="51" type="text" maxlength="1"></li>
+      <li><input id="52" type="text" maxlength="1"></li>
+      <li><input id="53" type="text" maxlength="1"></li>
+      <li><input id="54" type="text" maxlength="1"></li>
+      <li><input id="55" type="text" maxlength="1"></li>
+      <li><input id="56" type="text" maxlength="1"></li>
+      <li><input id="57" type="text" maxlength="1"></li>
+      <li><input id="58" type="text" maxlength="1"></li>
+      <li><input id="59" type="text" maxlength="1"></li>
+      <li><input id="60" type="text" maxlength="1"></li>
+      <li><input id="61" type="text" maxlength="1"></li>
+      <li><input id="62" type="text" maxlength="1"></li>
+      <li><input id="63" type="text" maxlength="1"></li>
+      <li><input id="64" type="text" maxlength="1"></li>
+      <li><input id="65" type="text" maxlength="1"></li>
+      <li><input id="66" type="text" maxlength="1"></li>
+      <li><input id="67" type="text" maxlength="1"></li>
+      <li><input id="68" type="text" maxlength="1"></li>
+      <li><input id="69" type="text" maxlength="1"></li>
+      <li><input id="70" type="text" maxlength="1"></li>
+      <li><input id="71" type="text" maxlength="1"></li>
+      <li><input id="72" type="text" maxlength="1"></li>
+      <li><input id="73" type="text" maxlength="1"></li>
+      <li><input id="74" type="text" maxlength="1"></li>
+      <li><input id="75" type="text" maxlength="1"></li>
+      <li><input id="76" type="text" maxlength="1"></li>
+      <li><input id="77" type="text" maxlength="1"></li>
+      <li><input id="78" type="text" maxlength="1"></li>
+      <li><input id="79" type="text" maxlength="1"></li>
+      <li><input id="80" type="text" maxlength="1"></li>
+    </ul>
+    <div class="wrapper">
+      <button class="button" onclick="init()">Solve</button>
+    </div>
+  </main>
+
+  <script type="module">
+    import init from "./pkg/sudoku.js";
+    window.init = init;
+  </script>
+</body>
+</html>
