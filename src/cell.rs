@@ -1,26 +1,57 @@
-#[derive(Clone, Copy, PartialEq)]
+use std::fmt::{ self, Display, Formatter, Debug};
+use wasm_bindgen::JsValue;
+
+#[derive(Copy, Clone, PartialEq)]
 pub enum Cell {
     Candidates([bool; 9]),
     Solution(usize),
     NoSolution,
 }
 
+impl Display for Cell {
+    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
+        let s = match self {
+            Cell::Candidates(_) => String::from(" "),
+            Cell::NoSolution => String::from("x"),
+            Cell::Solution(1) => String::from("1️"),
+            Cell::Solution(2) => String::from("2️"),
+            Cell::Solution(3) => String::from("3️"),
+            Cell::Solution(4) => String::from("4️"),
+            Cell::Solution(5) => String::from("5️"),
+            Cell::Solution(6) => String::from("6️"),
+            Cell::Solution(7) => String::from("7️"),
+            Cell::Solution(8) => String::from("8️"),
+            Cell::Solution(9) => String::from("9️"),
+            _ => String::from("y") // should never happen
+        };
+        write!(f, "{}", s)
+    }
+}
 
-impl Cell {
-    pub fn as_str(&self) -> &'static str {
-        match self {
-            Cell::Candidates(_) => "?",
-            Cell::NoSolution => "x",
-            Cell::Solution(1) => "1",
-            Cell::Solution(2) => "2",
-            Cell::Solution(3) => "3",
-            Cell::Solution(4) => "4",
-            Cell::Solution(5) => "5",
-            Cell::Solution(6) => "6",
-            Cell::Solution(7) => "7",
-            Cell::Solution(8) => "8",
-            Cell::Solution(9) => "9",
-            _ => "y" // should never happen
-        }
+impl Debug for Cell {
+    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
+        let s = match self {
+            Cell::Candidates(array) => {
+                array.iter().filter(|x| **x == true).count().to_string()
+            },
+            Cell::NoSolution => String::from("x"),
+            Cell::Solution(1) => String::from("1️⃣"),
+            Cell::Solution(2) => String::from("2️⃣"),
+            Cell::Solution(3) => String::from("3️⃣"),
+            Cell::Solution(4) => String::from("4️⃣"),
+            Cell::Solution(5) => String::from("5️⃣"),
+            Cell::Solution(6) => String::from("6️⃣"),
+            Cell::Solution(7) => String::from("7️⃣"),
+            Cell::Solution(8) => String::from("8️⃣"),
+            Cell::Solution(9) => String::from("9️⃣"),
+            _ => String::from("y") // should never happen
+        };
+        write!(f, "{}", s)
+    }
+}
+
+impl From<&Cell> for JsValue {
+    fn from(cell: &Cell) -> Self {
+        Self::from(cell.to_string())
     }
 }

@@ -10,15 +10,14 @@ fn get_sudoku_from_file(path: &str) -> Sudoku {
     //     .collect();
 
     let string = std::fs::read_to_string(path).unwrap();
-    let mut hints: Vec<[usize; 3]> = Vec::new();
 
-    for line in string.lines() {
+    let hints: Vec<[usize; 3]> = string.lines().map(|line| {
         let row = line[..1].parse().unwrap();
         let col = line[2..3].parse().unwrap();
         let value = line[4..5].parse().unwrap();
+        [row, col, value]
+    }).collect();
 
-        hints.push([row, col, value]);
-    }
     Sudoku::test_new(hints)
 }
 
@@ -33,7 +32,41 @@ fn get_sudoku_from_file(path: &str) -> Sudoku {
 // cargo watch “test -- --nocapture”
 
 #[test]
-fn it_works() {
-    get_sudoku_from_file("./tests/resources/sudoku1.txt");
-    assert_eq!(2 + 2, 4);
+fn sudoku_1() {
+    let mut sudoku = get_sudoku_from_file("./tests/resources/sudoku1.txt");
+    let answer = get_sudoku_from_file("./tests/resources/answer1.txt");
+    // println!("{:?}", sudoku);
+    sudoku.solve();
+    assert_eq!(sudoku, answer);
 }
+// #[test]
+fn sudoku_2() {
+    let mut sudoku = get_sudoku_from_file("./tests/resources/sudoku2.txt");
+    let answer = get_sudoku_from_file("./tests/resources/answer2.txt");
+    sudoku.solve();
+    assert_eq!(sudoku, answer)
+}
+// #[test]
+// fn sudoku_3() {
+//     let sudoku = get_sudoku_from_file("./tests/resources/sudoku3.txt");
+//     let answer = get_sudoku_from_file("./tests/resources/answer3.txt");
+//     assert_eq!(sudoku, answer)
+// }
+// #[test]
+// fn sudoku_4() {
+//     let sudoku = get_sudoku_from_file("./tests/resources/sudoku4.txt");
+//     let answer = get_sudoku_from_file("./tests/resources/answer4.txt");
+//     assert_eq!(sudoku, answer)
+// }
+// #[test]
+// fn sudoku_5() {
+//     let sudoku = get_sudoku_from_file("./tests/resources/sudoku5.txt");
+//     let answer = get_sudoku_from_file("./tests/resources/answer5.txt");
+//     assert_eq!(sudoku, answer)
+// }
+// #[test]
+// fn sudoku_6() {
+//     let sudoku = get_sudoku_from_file("./tests/resources/sudoku6.txt");
+//     let answer = get_sudoku_from_file("./tests/resources/answer6.txt");
+//     assert_eq!(sudoku, answer)
+// }

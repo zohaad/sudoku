@@ -40,12 +40,14 @@ pub fn run() ->  Result<(), JsValue>{
     }
     
     let mut sudoku = Sudoku::new(cells);
+    // TODO: make sudoku print to console
+    // console::log_1(sudoku.into());
     sudoku.solve();
 
     // put in DOM
     for i in 0..81 {
         let el = document.get_element_by_id(&i.to_string()).unwrap();
-        el.dyn_into::<HtmlInputElement>().unwrap().set_value(sudoku.ith_as_str(i));
+        el.dyn_into::<HtmlInputElement>().unwrap().set_value(&sudoku.ith_as_str(i));
     }
 
     Ok(())
